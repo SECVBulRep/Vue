@@ -1,0 +1,16 @@
+.index {
+    text-align: center;
+    margin: auto
+}
+    .index .img {
+        padding: 200px 0 0 0;
+        width: 200px;
+        height: 200px;
+    }
+    .index .img {
+        width: 140px;
+        margin: auto
+    }
+.container2 {
+    background: red;
+}

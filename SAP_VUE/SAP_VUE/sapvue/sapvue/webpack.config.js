@@ -1,18 +1,34 @@
 ﻿var path = require('path');
 var webpack = require('webpack');
-const bundleOutputDir = './wwwroot/dist';
 
+
+const bundleOutputDir = './wwwroot/dist';
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+
+
+var PROD = (process.env.NODE_ENV === 'production')
+
+ 
 module.exports = {
     context: __dirname,
     entry: { main: './App/index.js' },
+
+    output: {
+        path: path.join(__dirname, bundleOutputDir),
+        filename: '[name].js',
+        publicPath: 'dist/'
+    },
+
     module: {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader'
-                ],
+                use: ExtractTextPlugin.extract({
+                    fallback: 'vue-style-loader',
+                    use: [
+                        { loader: 'css-loader', options: { minimize: PROD } }
+                    ]
+                })
             },
             {
                 test: /\.vue$/,
@@ -46,43 +62,41 @@ module.exports = {
             }
         ]
     },
+
     resolve: {
         alias: {
             'vue$': 'vue/dist/vue.esm.js'
         },
         extensions: ['*', '.js', '.vue', '.json']
     },
+
     devServer: {
         historyApiFallback: true,
         noInfo: true,
         overlay: true
     },
+
     performance: {
         hints: false
-    }, output: {
-        path: path.join(__dirname, bundleOutputDir),
-        filename: '[name].js',
-        publicPath: 'dist/'
-    },
-    devtool: '#eval-source-map'
-}
+    },   
 
-if (process.env.NODE_ENV === 'production') {
-    module.exports.devtool = '#source-map'
-    module.exports.plugins = (module.exports.plugins || []).concat([
-        new webpack.DefinePlugin({
-            'process.env': {
-                NODE_ENV: '"production"'
-            }
-        }),
+    devtool: '#eval-source-map',
+
+    plugins: PROD ?
+        [
+
+        new ExtractTextPlugin('styles.css'),
         new webpack.optimize.UglifyJsPlugin({
             sourceMap: true,
             compress: {
                 warnings: false
             }
-        }),
-        new webpack.LoaderOptionsPlugin({
-            minimize: true
         })
-    ])
+        ] :
+        [
+            new ExtractTextPlugin('styles.css'),
+        ]
+
+    
 }
+

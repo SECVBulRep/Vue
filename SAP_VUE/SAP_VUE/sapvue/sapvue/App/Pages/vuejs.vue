@@ -1,7 +1,7 @@
 ﻿<<template>
     <div>
         <p>
-            VUEJS
+            VUEJS 
         </p>
     </div>
 </template>
