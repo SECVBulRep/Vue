@@ -11,7 +11,7 @@ var PROD = (process.env.NODE_ENV === 'production')
  
 module.exports = {
     context: __dirname,
-    entry: { main: './App/index.js' },
+    entry: { main: './App/app.js' },
 
     output: {
         path: path.join(__dirname, bundleOutputDir),
