@@ -1,10 +1,10 @@
-﻿import index from '../Pages/index.vue';
-import vuejs from '../Pages/vuejs.vue'
-import auth from '../Pages/auth.vue'
-import js from '../Pages/js.vue'
-import cpp from '../Pages/cpp.vue'
-import linux from '../Pages/linux.vue'
-import page404 from '../Pages/404.vue'
+﻿import index from '../pages/index.vue';
+import vuejs from '../pages/vuejs.vue'
+import auth from '../pages/auth.vue'
+import js from '../pages/js.vue'
+import cpp from '../pages/cpp.vue'
+import linux from '../pages/linux.vue'
+import page404 from '../pages/404.vue'
 
 
 const redirectPage = '/';

@@ -3,6 +3,8 @@
 </template>   
 <script>
     import authForm from '../components/authForm.vue'
+   
+
     export default {
         components: {
             authForm
