@@ -1,6 +1,6 @@
 ﻿<template>
     <div>
-        <top-menu v-show="currentRoute!='/'"></top-menu>
+        <top-menu v-show="currentRoute!=='/'"></top-menu>
         <router-view></router-view>
     </div>
 </template>

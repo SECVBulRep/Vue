@@ -1,8 +1,7 @@
 ﻿<template>  
     <div class="topMenu">    
         <div>
-            <img  src="../assets/img/Vueb.png" style=" height: 50px; width:50px"/>
-
+            <img  src="../assets/img/Vueb.png" style=" height: 50px; width:50px"/>                         
         </div>
         <div class="menu">
             <router-link tag="a" to="/vuejs">vuejs</router-link>
