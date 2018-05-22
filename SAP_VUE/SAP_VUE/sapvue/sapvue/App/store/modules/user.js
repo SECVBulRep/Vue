@@ -16,10 +16,7 @@ const actions = {
             {
                 email,
                 password
-
             }).then((res) => {
-                debugger;
-
             }).catch((err) => {
                 console('error /api/auth', err);
             });

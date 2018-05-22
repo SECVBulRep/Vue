@@ -3,15 +3,16 @@ import './assets/css/temp.css'
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import {sync} from 'vuex-router-sync'
-
+import { sync } from 'vuex-router-sync'
 
 import App from './app.vue'
 import { routes } from "./system/routes"
 import store from "./store/modules/index";
+import Notifications from 'vue-notification'
 
 
-Vue.use(VueRouter); 
+Vue.use(VueRouter);
+Vue.use(Notifications);
 export const router = new VueRouter({
         mode: 'history',
         routes
