@@ -31,6 +31,8 @@
 
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.5" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="2.0.1" />
+    <PackageReference Include="System.Data.Sqlite" Version="1.0.108" />
   </ItemGroup>
 
 </Project>

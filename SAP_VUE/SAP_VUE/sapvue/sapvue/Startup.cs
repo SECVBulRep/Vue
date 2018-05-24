@@ -26,8 +26,7 @@ namespace sapvue
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\WORK\VuePractice\SAP_VUE\SAP_VUE\sapvue\sapvue.db\Database_local.mdf;Integrated Security=True;Connect Timeout=30";
-            services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
+            services.AddSingleton<IUserRepository, UserRepository>(provider => new UserRepository());
             services.AddMvc();
         }
 

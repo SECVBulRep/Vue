@@ -21,11 +21,8 @@ namespace sapvue.Controllers
 
         public IActionResult Index()
         {
-            //User user = new User();
-            //user.Id = 1;
-            //user.Email = "test@email.com";
-            //user.Password = "123";
-            //repo.Create(user);
+
+            var list = repo.Select();
             return View();
         }
 

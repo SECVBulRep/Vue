@@ -1,63 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using Dapper;
+using Microsoft.Data.Sqlite;
 using sapvue.db.Entities;
 
 namespace sapvue.db.Repository
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : BaseRepository, IUserRepository
     {
-        string connectionString = null;
-        public UserRepository(string conn)
+
+        public bool Delete(User article)
         {
-            connectionString = conn;
-        }
-        public List<User> GetUsers()
-        {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                return db.Query<User>("SELECT * FROM Users").ToList();
-            }
+            throw new System.NotImplementedException();
         }
 
-        public User Get(int id)
+        public bool Add(User article)
         {
-            using (IDbConnection db = new SqlConnection(connectionString))
+            throw new System.NotImplementedException();
+        }
+        
+        public List<User> Select()
+        {
+            List<User> result = null;
+            using (var connection = new SqliteConnection(connectionStringBuilder.ConnectionString))
             {
-                return db.Query<User>("SELECT * FROM Users WHERE Id = @id", new { id }).FirstOrDefault();
+                connection.Open();
+                result = connection.Query<User>("SELECT Id,Email,Password FROM Users").ToList();
             }
+            return result;
         }
 
-        public void Create(User user)
-        {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                var sqlQuery = "INSERT INTO Users (Id, Email, Password) VALUES(@Id, @Email, @Password)";
-                db.Execute(sqlQuery, user);
 
-            }
-        }
-
-        public void Update(User user)
-        {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                var sqlQuery = "UPDATE Users SET Email = @Email, Password = @Password WHERE Id = @Id";
-                db.Execute(sqlQuery, user);
-            }
-        }
-
-        public void Delete(int id)
-        {
-            using (IDbConnection db = new SqlConnection(connectionString))
-            {
-                var sqlQuery = "DELETE FROM Users WHERE Id = @id";
-                db.Execute(sqlQuery, new { id });
-            }
-        }
     }
 }
