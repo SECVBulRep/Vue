@@ -5,9 +5,9 @@ namespace sapvue.db.Repository
 {
     public interface IUserRepository
     {
-        bool Delete(User article);
+        void Delete(User user);
        
-        bool Add(User article);
+        User Add(User user);
 
         List<User> Select();
     }

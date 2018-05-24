@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using Dapper;
 using Microsoft.Data.Sqlite;
@@ -10,16 +11,23 @@ namespace sapvue.db.Repository
     public class UserRepository : BaseRepository, IUserRepository
     {
 
-        public bool Delete(User article)
+        public void  Delete(User article)
         {
             throw new System.NotImplementedException();
         }
 
-        public bool Add(User article)
+        public User Add(User user)
         {
-            throw new System.NotImplementedException();
+            using (IDbConnection db = new SqliteConnection(connectionStringBuilder.ConnectionString))
+            {
+                var sqlQuery = "INSERT INTO Users (Email,Password) VALUES(@Email, @Password); SELECT last_insert_rowid() as int;";
+                int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
+                user.Id = userId.Value;
+            }
+
+            return user;
         }
-        
+
         public List<User> Select()
         {
             List<User> result = null;
