@@ -36,13 +36,9 @@ namespace sapvue.db.Repository
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "INSERT INTO Users (Id, Name, Age) VALUES(@Id, @Name, @Age)";
+                var sqlQuery = "INSERT INTO Users (Id, Email, Password) VALUES(@Id, @Email, @Password)";
                 db.Execute(sqlQuery, user);
 
-                // если мы хотим получить id добавленного пользователя
-                //var sqlQuery = "INSERT INTO Users (Name, Age) VALUES(@Name, @Age); SELECT CAST(SCOPE_IDENTITY() as int)";
-                //int? userId = db.Query<int>(sqlQuery, user).FirstOrDefault();
-                //user.Id = userId.Value;
             }
         }
 
@@ -50,7 +46,7 @@ namespace sapvue.db.Repository
         {
             using (IDbConnection db = new SqlConnection(connectionString))
             {
-                var sqlQuery = "UPDATE Users SET Name = @Name, Age = @Age WHERE Id = @Id";
+                var sqlQuery = "UPDATE Users SET Email = @Email, Password = @Password WHERE Id = @Id";
                 db.Execute(sqlQuery, user);
             }
         }
