@@ -30,6 +30,7 @@
     "babel-preset-stage-2": "^6.18.0",
     "babel-preset-stage-3": "^6.24.1",
     "babel-register": "^6.18.0",
+    "dapper": "0.0.6",
     "lodash": "^4.17.10",
     "mini-toastr": "^0.8.1",
     "morgan": "^1.9.0",

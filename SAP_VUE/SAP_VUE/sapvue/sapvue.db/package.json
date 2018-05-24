@@ -1,0 +1,8 @@
+{
+ "name": "lingaro.office.planner",
+ "private": true,
+ "version": "0.0.0",
+ "devDependencies": {},
+ "dependencies": {
+ }
+}

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using sapvue.db.Repository;
 
 namespace sapvue
 {
@@ -17,11 +18,16 @@ namespace sapvue
             Configuration = configuration;
         }
 
+     
+
+
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            string connectionString = @"Data Source=(LocalDB)\MSSQLLocalDB;AttachDbFilename=D:\Work\Practice\Vue.git\SAP_VUE\SAP_VUE\sapvue\sapvue.db\Database.mdf;Integrated Security=True;Connect Timeout=30";
+            services.AddTransient<IUserRepository, UserRepository>(provider => new UserRepository(connectionString));
             services.AddMvc();
         }
 
