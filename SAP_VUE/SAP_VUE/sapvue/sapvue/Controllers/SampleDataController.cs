@@ -13,7 +13,7 @@ namespace sapvue.Controllers
         [HttpPost("auth")]
         public BaseRespone Authentifcation([FromBody] AuthModel model)
         {
-            var resp = new BaseRespone {Code = "1"};
+            var resp = new BaseRespone {Code = "0"};
             return resp;
         }
          
