@@ -10,5 +10,7 @@ namespace sapvue.db.Repository
         User Add(User user);
 
         List<User> Select();
+
+        User Authenticate(string login, string password);
     }
 }

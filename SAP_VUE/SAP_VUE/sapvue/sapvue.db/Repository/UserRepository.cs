@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Net.Security;
 using Dapper;
 using Microsoft.Data.Sqlite;
 using sapvue.db.Entities;
@@ -37,6 +38,12 @@ namespace sapvue.db.Repository
                 result = connection.Query<User>("SELECT Id,Email,Password FROM Users").ToList();
             }
             return result;
+        }
+
+
+        public User Authenticate(string login, string  password)
+        {
+            return Select().SingleOrDefault(x => x.Email == login && x.Password == password);
         }
 
 

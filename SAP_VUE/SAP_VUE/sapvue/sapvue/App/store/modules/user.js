@@ -12,7 +12,7 @@ const actions = {
     auth({ commit }, { email, password, repassword }) {
         console.log('email, password = ', email, password);
 
-        axios.post('/api/SampleData/auth',
+        axios.post('/api/Account/auth',
             {
                 email,
                 password
