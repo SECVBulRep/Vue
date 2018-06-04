@@ -1,0 +1,51 @@
+{
+  "name": "lingaro.office.planner",
+  "private": true,
+  "version": "0.0.0",
+  "devDependencies": {
+    "@types/webpack-env": "^1.13.5",
+    "aspnet-webpack": "^2.0.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "css-loader": "^0.25.0",
+    "event-source-polyfill": "^0.0.7",
+    "extract-text-webpack-plugin": "^2.1.2",
+    "file-loader": "^0.9.0",
+    "isomorphic-fetch": "^2.2.1",
+    "node-sass": "^4.5.3",
+    "sass-loader": "^6.0.6",
+    "style-loader": "^0.13.2",
+    "url-loader": "^0.5.7",
+    "webpack": "^2.7.0",
+    "webpack-hot-middleware": "^2.21.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-async-to-generator": "^6.22.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-2": "^6.18.0",
+    "babel-preset-stage-3": "^6.24.1",
+    "babel-register": "^6.18.0",
+    "dapper": "0.0.6",
+    "lodash": "^4.17.10",
+    "mini-toastr": "^0.8.1",
+    "morgan": "^1.9.0",
+    "validator": "^10.2.0",
+    "vue": "^2.5.13",
+    "vue-loader": "^14.0.3",
+    "vue-notification": "^1.3.7",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.13",
+    "vuex": "^3.0.1",
+    "vuex-router-sync": "^5.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}
