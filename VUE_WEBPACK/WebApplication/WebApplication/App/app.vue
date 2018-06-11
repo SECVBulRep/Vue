@@ -2,7 +2,7 @@
     <div class="training">
         <h1>Math training</h1>
         <hr />
-        <app-start v-if="state=='start'"></app-start>
+        <app-start v-if="state=='start'" @onStart="onStart"></app-start>
         <app-question v-else-if="state=='question'"></app-question>
         <app-message v-else-if="state=='message'"></app-message>
         <app-result-screen v-else-if="state=='result'"></app-result-screen>
@@ -15,7 +15,12 @@
     export default {
         data() {
             return {
-                state: 'question'
+                state: 'start'
+            }
+        },
+        methods: {
+            onStart() {
+                this.state = 'question';
             }
         }
     }
