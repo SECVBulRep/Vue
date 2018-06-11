@@ -3,12 +3,12 @@ var webpack = require('webpack');
 
 
 const bundleOutputDir = './wwwroot/dist';
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 
-var PROD = (process.env.NODE_ENV === 'production')
+var PROD = process.env.NODE_ENV === 'production';
 
- 
+
 module.exports = {
     context: __dirname,
     entry: { main: './App/app.js' },
@@ -78,25 +78,24 @@ module.exports = {
 
     performance: {
         hints: false
-    },   
+    },
 
     devtool: '#eval-source-map',
 
-    plugins: PROD ?
-        [
-
-        new ExtractTextPlugin('styles.css'),
-        new webpack.optimize.UglifyJsPlugin({
-            sourceMap: true,
-            compress: {
-                warnings: false
-            }
-        })
-        ] :
-        [
-            new ExtractTextPlugin('styles.css'),
+    plugins: PROD
+        ? [
+            new ExtractTextPlugin('bootstrap.css'),
+            new webpack.optimize.UglifyJsPlugin({
+                sourceMap: true,
+                compress: {
+                    warnings: false
+                }
+            })
+        ]
+        : [
+            new ExtractTextPlugin('bootstrap.css')
         ]
 
-    
-}
+
+};
 
