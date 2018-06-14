@@ -3,7 +3,6 @@
         <h3>Are u ready?</h3>
         <button class="btn btn-success" v-on:click="$emit('onStart')">Start</button>
     </div>
-
 </template>
 
 <script>
