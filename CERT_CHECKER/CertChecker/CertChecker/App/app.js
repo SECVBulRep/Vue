@@ -9,6 +9,7 @@ import { sync } from 'vuex-router-sync'
 import { routes } from "./system/routes"
 
 Vue.use(VueRouter);
+
 export const router = new VueRouter({
     mode: 'history',
     routes

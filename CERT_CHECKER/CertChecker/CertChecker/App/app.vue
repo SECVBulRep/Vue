@@ -5,10 +5,7 @@
         </div>
         <div v-else-if="$route.meta.layout == '_mainLayout'">
             <main-layout></main-layout>
-        </div>
-        <div v-else>
-            <main-layout></main-layout>
-        </div>
+        </div>        
     </div>
 </template>
 <script>   

@@ -3,18 +3,18 @@
         <ul class="sidebar-nav">
             <li class="sidebar-brand">
                 <a href="#">
-                    Start Bootstrap
+                    Главная
                 </a>
             </li>
-            <li>               
+            <li>
                 <router-link to="/index">Главная</router-link>
             </li>
-            <li>               
+            <li>
                 <router-link to="/tasks">Задачи</router-link>
             </li>
-            <li>               
+            <li>
                 <router-link to="/auth">Войти</router-link>
-            </li>          
+            </li>
         </ul>
     </div>
 </template>
@@ -37,7 +37,7 @@
         -moz-transition: all 0.5s ease;
         -o-transition: all 0.5s ease;
         transition: all 0.5s ease;
-    }   
+    }
 
     .sidebar-nav {
         position: absolute;
