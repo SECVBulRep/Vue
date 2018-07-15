@@ -14,6 +14,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,9 +24,12 @@
   <ItemGroup>
     <Folder Include="App\assets\img\" />
     <Folder Include="App\assets\js\" />
-    <Folder Include="Models\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\dist\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CertChecker.Db\CertChecker.Db.csproj" />
   </ItemGroup>
 
 </Project>
