@@ -1,10 +1,8 @@
 ﻿<template>
     <div id="sidebar-wrapper">
         <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="#">
-                    Главная
-                </a>
+            <li class="sidebar-brand">                
+                <router-link to="/index">Главная</router-link>
             </li>
             <li>
                 <router-link to="/index">Главная</router-link>
