@@ -6,10 +6,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link href="dist/styles.css" rel="stylesheet" />
 </head>
-<body>
-    <div id="wrapper" class="toggled">
-        @RenderBody()
-    </div>
-    @RenderSection("scripts", required: false)
-</body>
+@RenderBody()
+@RenderSection("scripts", required: false)
 </html>

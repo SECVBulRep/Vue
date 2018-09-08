@@ -1,10 +1,14 @@
 ﻿<template>
-    <div>
-        <side-bar></side-bar>
-        <div id="page-content-wrapper">
-            <router-view></router-view>
+    <body>
+        <div id="wrapper" class="toggled">
+            <div>
+                <side-bar></side-bar>
+                <div id="page-content-wrapper">
+                    <router-view></router-view>
+                </div>
+            </div>
         </div>
-    </div>
+    </body>
 </template>
 
 <script>
@@ -16,5 +20,5 @@
     }
 </script>
 
-<style scoped>  
+<style src="../../assets/css/mainLayout.css" scoped>   
 </style>
