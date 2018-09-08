@@ -11,7 +11,6 @@ export const routes = [
         meta: {
             layout: '_mainLayout'
         }
-        
     },
     {
         path: '/index',

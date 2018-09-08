@@ -9,7 +9,7 @@
                         <strong> Sign in to continue</strong>
                     </div>
                     <div class="panel-body">
-                        <form role="form" action="#" method="POST">
+                        <form  role="form" action="#" method="POST" v-on:submit.prevent>
                             <fieldset>
                                 <div class="row">
                                     <div class="center-block">
@@ -24,7 +24,7 @@
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-user"></i>
                                                 </span>
-                                                <input class="form-control" placeholder="Username" name="loginname" type="text" autofocus>
+                                                <input class="form-control" placeholder="email" name="email" type="text" autofocus v-model.lazy="model.email">
                                             </div>
                                         </div>
                                         <div class="form-group">
@@ -32,11 +32,21 @@
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-lock"></i>
                                                 </span>
-                                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
+                                                <input class="form-control" placeholder="password" name="password" type="password" v-model.lazy="model.password">
                                             </div>
                                         </div>
+
+                                        <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
+                                            <label class="form__label">Name</label>
+                                            <input class="form__input" v-model.trim="$v.name.$model" />
+                                        </div>
+                                        <div class="error" v-if="!$v.name.required">Field is required</div>
+                                        <div class="error" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
+
+
+
                                         <div class="form-group">
-                                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in">
+                                            <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" v-on:click="submitAuth()">
                                         </div>
                                     </div>
                                 </div>
@@ -55,19 +65,33 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import Validator from "../system/validators/loginValidator"
+    import loginValidator from "../system/validators/loginValidator"
+    import { debug } from 'util';
+    import { required, minLength, between } from 'vuelidate/lib/validators'
 
     export default {
         data() {
             return {
                 model: {
-                    login: '',
-                    password:''
+                    email: '',
+                    password: '',
+                    name:''
                 }
             }            
         },
         methods: {
-            ...mapActions(['auth'])
+            ...mapActions(['auth']),
+            submitAuth() {
+                let v = loginValidator(this.model);
+                debugger;
+
+            }
+        },
+        validations: {
+            name: {
+                required,
+                minLength: minLength(4)
+            }
         }
     }
 </script>

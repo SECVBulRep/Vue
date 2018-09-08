@@ -6,12 +6,16 @@ import Vue from 'vue';
 import App from './app.vue';
 import VueRouter from 'vue-router'
 import { sync } from 'vuex-router-sync'
+import Vuelidate from 'vuelidate'
 
 /*внутренние библиотеки*/
 import store from "./store/store"
 import { routes } from "./system/routes"
 
+
 Vue.use(VueRouter);
+Vue.use(Vuelidate);
+
 export const router = new VueRouter({
     mode: 'history',
     routes
