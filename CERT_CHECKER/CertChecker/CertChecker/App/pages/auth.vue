@@ -19,13 +19,14 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-                                        <div class="form-group">
+                                        <div class="form-group" v-bind:class="{'has-error': errors.has('email'), 'has-success': !errors.has('email')}">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-user"></i>
                                                 </span>
-                                                <input class="form-control" placeholder="email" name="email" type="text" autofocus v-model.lazy="model.email">
-                                            </div>
+                                                <input class="form-control" placeholder="email" v-validate="'required|email'" name="email" type="text" autofocus v-model.lazy="model.email">
+                                            </div>                                           
+                                            <div class="help-block with-errors">{{ errors.first('email') }}</div>
                                         </div>
                                         <div class="form-group">
                                             <div class="input-group">
@@ -35,16 +36,6 @@
                                                 <input class="form-control" placeholder="password" name="password" type="password" v-model.lazy="model.password">
                                             </div>
                                         </div>
-
-                                        <div class="form-group" :class="{ 'form-group--error': $v.name.$error }">
-                                            <label class="form__label">Name</label>
-                                            <input class="form__input" v-model.trim="$v.name.$model" />
-                                        </div>
-                                        <div class="error" v-if="!$v.name.required">Field is required</div>
-                                        <div class="error" v-if="!$v.name.minLength">Name must have at least {{$v.name.$params.minLength.min}} letters.</div>
-
-
-
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" v-on:click="submitAuth()">
                                         </div>
@@ -66,8 +57,7 @@
 <script>
     import { mapActions } from 'vuex';
     import loginValidator from "../system/validators/loginValidator"
-    import { debug } from 'util';
-    import { required, minLength, between } from 'vuelidate/lib/validators'
+    import { debug } from 'util';  
 
     export default {
         data() {
@@ -85,12 +75,6 @@
                 let v = loginValidator(this.model);
                 debugger;
 
-            }
-        },
-        validations: {
-            name: {
-                required,
-                minLength: minLength(4)
             }
         }
     }
