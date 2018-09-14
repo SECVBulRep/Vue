@@ -5,8 +5,8 @@
         </div>
         <div v-else-if="$route.meta.layout == '_mainLayout'">
             <main-layout></main-layout>
-        </div>        
-    </div>
+        </div>      
+    </div>  
 </template>
 <script>   
     import { router } from './app';

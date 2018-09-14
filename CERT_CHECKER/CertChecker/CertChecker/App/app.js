@@ -4,9 +4,10 @@ import './assets/css/site.css'
 /*библиотеки*/
 import Vue from 'vue';
 import App from './app.vue';
-import VueRouter from 'vue-router'
-import { sync } from 'vuex-router-sync'
+import VueRouter from 'vue-router';
+import { sync } from 'vuex-router-sync';
 import VeeValidate from 'vee-validate';
+import Notifications from 'vue-notification';
 
 
 /*внутренние библиотеки*/
@@ -15,6 +16,7 @@ import { routes } from "./system/routes"
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);
+Vue.use(Notifications);
 
 export const router = new VueRouter({
     mode: 'history',

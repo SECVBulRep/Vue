@@ -9,7 +9,7 @@
                         <strong> Sign in to continue</strong>
                     </div>
                     <div class="panel-body">
-                        <form  role="form" action="#" method="POST" v-on:submit.prevent>
+                        <form role="form" action="#" method="POST" v-on:submit.prevent>
                             <fieldset>
                                 <div class="row">
                                     <div class="center-block">
@@ -19,22 +19,23 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-12 col-md-10  col-md-offset-1 ">
-                                        <div class="form-group" v-bind:class="{'has-error': errors.has('email'), 'has-success': !errors.has('email')}">
+                                        <div class="form-group" v-bind:class="{'has-error': errors.has('email')}">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-user"></i>
                                                 </span>
                                                 <input class="form-control" placeholder="email" v-validate="'required|email'" name="email" type="text" autofocus v-model.lazy="model.email">
-                                            </div>                                           
+                                            </div>
                                             <div class="help-block with-errors">{{ errors.first('email') }}</div>
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" v-bind:class="{'has-error': errors.has('password')}">
                                             <div class="input-group">
                                                 <span class="input-group-addon">
                                                     <i class="glyphicon glyphicon-lock"></i>
                                                 </span>
-                                                <input class="form-control" placeholder="password" name="password" type="password" v-model.lazy="model.password">
+                                                <input class="form-control" placeholder="password" v-validate="'required'" name="password" type="password" v-model.lazy="model.password">
                                             </div>
+                                            <div class="help-block with-errors">{{ errors.first('password') }}</div>
                                         </div>
                                         <div class="form-group">
                                             <input type="submit" class="btn btn-lg btn-primary btn-block" value="Sign in" v-on:click="submitAuth()">
@@ -44,20 +45,21 @@
                             </fieldset>
                         </form>
                     </div>
-                    <div class="panel-footer ">
-                        Don't have an account! <a href="#" onClick=""> Sign Up Here </a>
-                    </div>
+
                 </div>
             </div>
         </div>
+        <notifications group="auth-notifies" />
     </div>
 
 </template>
 
+
+
 <script>
     import { mapActions } from 'vuex';
-    import loginValidator from "../system/validators/loginValidator"
-    import { debug } from 'util';  
+    import loginValidator from "../system/validators/loginValidator";
+    import { debug } from 'util';
 
     export default {
         data() {
@@ -65,20 +67,35 @@
                 model: {
                     email: '',
                     password: '',
-                    name:''
+                    name: ''
                 }
-            }            
+            };
         },
         methods: {
             ...mapActions(['auth']),
             submitAuth() {
                 let v = loginValidator(this.model);
-                debugger;
-
+                                
+                this.$validator.validateAll().then((result) => {
+                    if (v.isValid) {
+                        //let t = 1;
+                        this.auth(this.model);
+                    }
+                    else {
+                        for (var i in v.errors) {
+                            this.$notify({
+                                group: 'auth-notifies',
+                                title: v.errors[i].message,
+                                text: v.errors[i].message
+                            });
+                        }
+                    }
+                });               
             }
         }
-    }
+    };
 </script>
+
 
 <style scoped>
     .panel-heading {
