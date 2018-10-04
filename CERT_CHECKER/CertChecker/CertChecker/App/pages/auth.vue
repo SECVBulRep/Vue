@@ -60,6 +60,8 @@
     import { mapActions } from 'vuex';
     import loginValidator from "../system/validators/loginValidator";
     import { debug } from 'util';
+    import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from "../store/actions/auth";
+
 
     export default {
         data() {
@@ -71,15 +73,22 @@
                 }
             };
         },
-        methods: {
-            ...mapActions(['auth']),
+        methods: {           
+
+            ...mapActions({
+                auth: AUTH_REQUEST // проксирует `this.auth()` в `this.$store.dispatch('AUTH_REQUEST')`
+            }),
+
             submitAuth() {
                 let v = loginValidator(this.model);
                                 
                 this.$validator.validateAll().then((result) => {
-                    if (v.isValid) {
-                        //let t = 1;
-                        this.auth(this.model);
+                    if (v.isValid) {                                           
+
+                        this.auth(this.model).then(() => {
+                            this.$router.push('/');
+                        });
+
                     }
                     else {
                         for (var i in v.errors) {

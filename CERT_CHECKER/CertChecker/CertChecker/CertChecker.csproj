@@ -24,6 +24,7 @@
   <ItemGroup>
     <Folder Include="App\assets\img\" />
     <Folder Include="App\assets\js\" />
+    <Folder Include="App\store\mutations\" />
     <Folder Include="wwwroot\" />
     <Folder Include="wwwroot\dist\" />
   </ItemGroup>
