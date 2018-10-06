@@ -1,6 +1,6 @@
 ﻿import axios from 'axios';
 import { AUTH_URL } from "../../system/constants/urls";
-import { ERROR_AUTH_INCORRECT_LOGIN_PASSWORD, ERROR_SERVER } from "../../system/constants/errors";
+import { SUCCESS, handleError } from "../../system/constants/errors";
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from "../actions/auth";
 import { USER_REQUEST } from '../actions/user';
 
@@ -28,13 +28,19 @@ const actions = {
     [AUTH_REQUEST]: ({ commit, dispatch }, payLoad) => {
         return new Promise((resolve, reject) => {
             commit(AUTH_REQUEST);
-            axios({ url: AUTH_URL, data: payLoad, method: 'POST' })
+            axios({
+                url: AUTH_URL, data: payLoad, method: 'POST',
+                headers: {
+                        'Content-Type': 'application/json'
+                    }})
                 .then(resp => {
+                    debugger;
+
                     let result = resp.data;
 
                     //если как нибудь ошибка 
-                    if ([ERROR_AUTH_INCORRECT_LOGIN_PASSWORD, ERROR_SERVER].indexOf(result.code) >= 0) {
-                        alert('error');
+                    if (SUCCESS!==result.code) {
+                        handleError(result.code);
                     }
 
 
@@ -46,6 +52,7 @@ const actions = {
                     //resolve(resp);
                 })
                 .catch(err => {
+                    debugger;
                     //commit(AUTH_ERROR, err);
                     //localStorage
                     //    .removeItem('user-token') // if the request fails, remove any possible user token if possible

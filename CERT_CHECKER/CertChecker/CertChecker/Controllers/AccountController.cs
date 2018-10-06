@@ -13,7 +13,9 @@ using Microsoft.IdentityModel.Tokens;
 
 namespace CertChecker.Controllers
 {
-    [Route("api/[controller]")]
+    
+    [ApiVersion("1")]
+    [Route("api/v{version:apiVersion}/[controller]")]
     public class AccountController : Controller
     {
         IUserRepository repo;
@@ -21,9 +23,8 @@ namespace CertChecker.Controllers
         {
             repo = r;
         }
-
-
-
+        
+       
         [HttpPost("auth")]
         public async Task<AuthResponse> Authentifcation([FromBody] AuthModel model)
         {
@@ -64,7 +65,7 @@ namespace CertChecker.Controllers
 
 
         [HttpGet("user")]
-        [Authorize]
+        //[Authorize]
         public UserResponse LoginGet()
         {
             var resp = new UserResponse { Code = "0" };

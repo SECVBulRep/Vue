@@ -7,6 +7,8 @@ using CertChecker.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.SpaServices.Webpack;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -55,6 +57,13 @@ namespace CertChecker
                 });
 
             services.AddMvc();
+            services.AddApiVersioning(options =>
+            {
+                options.ApiVersionReader = new QueryStringApiVersionReader();
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
+            });
+
         }
 
 
@@ -69,6 +78,8 @@ namespace CertChecker
                 {
                     HotModuleReplacement = true
                 });
+
+                
             }
             else
             {
@@ -77,6 +88,7 @@ namespace CertChecker
 
             app.UseStaticFiles();
             app.UseAuthentication();
+
 
             app.UseMvc(routes =>
             {
