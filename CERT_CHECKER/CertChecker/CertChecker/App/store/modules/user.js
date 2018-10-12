@@ -1,8 +1,8 @@
-﻿import axios from 'axios';
-import { AUTH_URL } from "../../system/constants/urls";
-import { SUCCESS, handleError } from "../../system/constants/errors";
+﻿import { AUTH_URL, GET_USER_URL } from "../../system/constants/urls";
+import { SUCCESS, ERROR_AUTH_INCORRECT_LOGIN_PASSWORD,handleError } from "../../system/constants/errors";
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from "../actions/auth";
 import { USER_REQUEST } from '../actions/user';
+import http from "../../system/helpers/httpHelper";
 
 
 const state = {
@@ -28,36 +28,16 @@ const actions = {
     [AUTH_REQUEST]: ({ commit, dispatch }, payLoad) => {
         return new Promise((resolve, reject) => {
             commit(AUTH_REQUEST);
-            axios({
-                url: AUTH_URL, data: payLoad, method: 'POST',
-                headers: {
-                        'Content-Type': 'application/json'
-                    }})
-                .then(resp => {
+
+            http.post(AUTH_URL, payLoad)
+                .then(function(response) {
                     debugger;
-
-                    let result = resp.data;
-
-                    //если как нибудь ошибка 
-                    if (SUCCESS!==result.code) {
-                        handleError(result.code);
+                    let data = response.data;
+                    if (data.code == ERROR_AUTH_INCORRECT_LOGIN_PASSWORD) {
+                        reject(data);
                     }
-
-
-                    //const token = resp.data.token;
-                    //localStorage.setItem('user-token', token); // store the token in localstorage
-                    //commit(AUTH_SUCCESS, token);
-                    //// you have your token, now log in your user :)
-                    //dispatch(USER_REQUEST);
-                    //resolve(resp);
-                })
-                .catch(err => {
-                    debugger;
-                    //commit(AUTH_ERROR, err);
-                    //localStorage
-                    //    .removeItem('user-token') // if the request fails, remove any possible user token if possible
-                    //reject(err);
                 });
+
         });
     }
 };

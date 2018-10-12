@@ -9,10 +9,9 @@ import { sync } from 'vuex-router-sync';
 import VeeValidate from 'vee-validate';
 import Notifications from 'vue-notification';
 
-
 /*внутренние библиотеки*/
-import store from "./store/store"
-import { routes } from "./system/routes"
+import store from "./store/store";
+import { routes } from "./system/routes";
 
 Vue.use(VueRouter);
 Vue.use(VeeValidate);

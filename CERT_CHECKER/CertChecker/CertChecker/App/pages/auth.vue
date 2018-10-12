@@ -58,9 +58,9 @@
 
 <script>
     import { mapActions } from 'vuex';
-    import loginValidator from "../system/validators/loginValidator";
-    import { debug } from 'util';
+    import loginValidator from "../system/validators/loginValidator";  
     import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from "../store/actions/auth";
+    import { SUCCESS, ERROR_AUTH_INCORRECT_LOGIN_PASSWORD, handleError } from "../system/constants/errors";
 
 
     export default {
@@ -85,9 +85,17 @@
                 this.$validator.validateAll().then((result) => {
                     if (v.isValid) {                                           
 
-                        this.auth(this.model).then(() => {
-                            this.$router.push('/');
-                        });
+                        this.auth(this.model)
+                            .then(() => {
+                                this.$router.push('/');
+                            }).catch((data) => {                              
+
+                                this.$notify({
+                                    group: 'auth-notifies',                                   
+                                    text: handleError(data.code)
+                                });
+
+                            });                           
 
                     }
                     else {

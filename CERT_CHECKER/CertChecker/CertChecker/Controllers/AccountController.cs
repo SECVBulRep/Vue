@@ -38,12 +38,10 @@ namespace CertChecker.Controllers
             }
             else
             {
-
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimsIdentity.DefaultNameClaimType, model.Email)
                 };
-
                 ClaimsIdentity claimsIdentity =
                     new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
                         ClaimsIdentity.DefaultRoleClaimType);
@@ -65,7 +63,7 @@ namespace CertChecker.Controllers
 
 
         [HttpGet("user")]
-        //[Authorize]
+        [Authorize]
         public UserResponse LoginGet()
         {
             var resp = new UserResponse { Code = "0" };
