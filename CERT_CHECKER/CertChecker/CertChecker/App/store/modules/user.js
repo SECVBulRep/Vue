@@ -1,55 +1,53 @@
-﻿import { AUTH_URL, GET_USER_URL } from "../../system/constants/urls";
-import { SUCCESS, ERROR_AUTH_INCORRECT_LOGIN_PASSWORD,handleError } from "../../system/constants/errors";
+﻿import { USER_REQUEST, USER_ERROR, USER_SUCCESS } from '../actions/user';
+import { AUTH_URL, GET_USER_URL } from "../../system/constants/urls";
+import Vue from 'vue';
 import { AUTH_REQUEST, AUTH_ERROR, AUTH_SUCCESS, AUTH_LOGOUT } from "../actions/auth";
-import { USER_REQUEST } from '../actions/user';
 import http from "../../system/helpers/httpHelper";
 
+const state = { status: '', profile: {} }
 
-const state = {
-    token: localStorage.getItem('user-token') || '',
-    status: ''
-};
-
-const mutations = {
-    [AUTH_REQUEST]: (state) => {
-        state.status = 'loading';
-    },
-    [AUTH_SUCCESS]: (state, token) => {
-        state.status = 'success';
-        state.token = token;
-    },
-    [AUTH_ERROR]: (state) => {
-        state.status = 'error';
-    }
+const getters = {
+    getProfile: state => state.profile,
+    isProfileLoaded: state => !!state.profile.name
 };
 
 const actions = {
+    [USER_REQUEST]: ({ commit, dispatch }) => {
+        debugger;
 
-    [AUTH_REQUEST]: ({ commit, dispatch }, payLoad) => {
-        return new Promise((resolve, reject) => {
-            commit(AUTH_REQUEST);
+        commit(USER_REQUEST);
 
-            http.post(AUTH_URL, payLoad)
-                .then(function(response) {
-                    debugger;
-                    let data = response.data;
-                    if (data.code == ERROR_AUTH_INCORRECT_LOGIN_PASSWORD) {
-                        reject(data);
-                    }
-                });
-
-        });
+        http.get(GET_USER_URL)
+            .then(function (resp) {
+                debugger;
+                commit(USER_SUCCESS, resp.data);
+            })
+            .catch(resp => {
+                commit(USER_ERROR);
+                dispatch(AUTH_LOGOUT);
+            });
     }
 };
 
-const getters = {
-    isAuthenticated: state => !!state.token,
-    authStatus: state => state.status
+const mutations = {
+    [USER_REQUEST]: (state) => {
+        state.status = 'loading';
+    },
+    [USER_SUCCESS]: (state, resp) => {
+        state.status = 'success';
+        Vue.set(state, 'profile', resp);
+    },
+    [USER_ERROR]: (state) => {
+        state.status = 'error';
+    },
+    [AUTH_LOGOUT]: (state) => {
+        state.profile = {};
+    }
 };
 
 export default {
     state,
-    mutations,
+    getters,
     actions,
-    getters
+    mutations
 };

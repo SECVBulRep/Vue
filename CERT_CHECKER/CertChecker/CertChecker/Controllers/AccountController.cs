@@ -64,10 +64,13 @@ namespace CertChecker.Controllers
 
         [HttpGet("user")]
         [Authorize]
-        public UserResponse LoginGet()
+        public UserResponse UserGet()
         {
             var resp = new UserResponse { Code = "0" };
+
+            var userInfo = repo.Select().Where(x => x.Email == User.Identity.Name).SingleOrDefault();
             resp.User = User.Identity.Name;
+            resp.Id = userInfo.Id.ToString();
             return resp;
         }
 
